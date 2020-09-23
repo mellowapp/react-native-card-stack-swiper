@@ -413,6 +413,21 @@ class CardStack extends Component {
       outputRange: this.props.outputRotationRange,
       extrapolate: 'clamp',
     });
+    const translate_y = drag.x.interpolate({
+      inputRange: [width * -1.5, 0, width * 1.5],
+      outputRange: [0,20,0],
+      extrapolate: 'clamp',
+    })
+    const active_opacity = drag.x.interpolate({
+      inputRange: [width * -1.5, 0, width * 1.5],
+      outputRange: [0.8,1,0.8],
+      extrapolate: 'clamp',
+    })
+    const inactive_opacity = drag.x.interpolate({
+      inputRange: [width * -1.5, 0, width * 1.5],
+      outputRange: [1,0.8,1],
+      extrapolate: 'clamp',
+    })
 
     return (
       <View {...this._panResponder.panHandlers} style={[{ position: 'relative' }, this.props.style]}>
@@ -429,10 +444,11 @@ class CardStack extends Component {
                 elevation: (topCard === 'cardB') ? 3 : 2,
               }
             }),
+            opacity: (topCard === 'cardB') ? active_opacity : inactive_opacity,
             transform: [
               { rotate: (topCard === 'cardB') ? rotate : '0deg' },
               { translateX: (topCard === 'cardB') ? drag.x : 0 },
-              { translateY: (topCard === 'cardB') ? drag.y : 0 },
+              { translateY: (topCard === 'cardB') ? drag.y : translate_y },
               { scale: (topCard === 'cardB') ? 1 : scale },
             ]
           }, this.props.cardContainerStyle]}>
@@ -448,10 +464,11 @@ class CardStack extends Component {
                 elevation: (topCard === 'cardA') ? 3 : 2,
               }
             }),
+            opacity: (topCard === 'cardA') ? active_opacity : inactive_opacity,
             transform: [
               { rotate: (topCard === 'cardA') ? rotate : '0deg' },
               { translateX: (topCard === 'cardA') ? drag.x : 0 },
-              { translateY: (topCard === 'cardA') ? drag.y : 0 },
+              { translateY: (topCard === 'cardA') ? drag.y : translate_y },
               { scale: (topCard === 'cardA') ? 1 : scale },
             ]
           }, this.props.cardContainerStyle]}>
