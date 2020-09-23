@@ -8,7 +8,7 @@ Tinder like react-native card stack swiper
 ## Installation
 
 ```
-  npm install --save react-native-card-stack-swiper
+  npm install --save git+https://github.com/mellowapp/react-native-card-stack-swiper.git
 ```
 
 ## Preview
