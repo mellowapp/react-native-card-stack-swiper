@@ -116,6 +116,7 @@ class CardStack extends Component {
         }
       },
       onPanResponderTerminate: (evt, gestureState) => {
+        this._resetCard();
       },
       onShouldBlockNativeResponder: (evt, gestureState) => {
         return true;
